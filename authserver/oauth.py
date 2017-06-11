@@ -64,7 +64,7 @@ class OauthCallback(MethodView):
             return flask.redirect('/oauth/redirect?provider=%s' % provider)
 
         _user = authService.get_user(email)
-        if _user and _user['provider'] != provider:
+        if _user['id'] and _user['provider'] != provider:
             response = dict(
                     status="fail",
                     message="User exists")

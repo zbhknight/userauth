@@ -2,6 +2,7 @@ from flask_restful import fields, marshal_with
 
 user_fields = {
         'id': fields.Integer,
+        'provider': fields.String,
         'email': fields.String}
 
 class AuthService:
@@ -21,6 +22,7 @@ class AuthService:
         return email in self._users and \
                 self._users[email]['provider'] == provider
 
+    @marshal_with(user_fields)
     def get_user(self, email):
         return self._users.get(email, {})
 
